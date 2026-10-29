@@ -1,0 +1,9 @@
+# Image for api, reporting, migrate and seed. Full node:20 (not slim) so
+# argon2/sharp native builds have a toolchain if no prebuilt binary matches.
+FROM node:20
+WORKDIR /app
+COPY package.json package-lock.json ./
+COPY packages/ packages/
+COPY apps/ apps/
+RUN npm ci
+COPY . .

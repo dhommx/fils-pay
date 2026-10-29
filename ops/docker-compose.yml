@@ -37,6 +37,8 @@ services:
   # FH: migrate also creates schema_migrations on first run, so a brand-new
   # database needs no manual step. (verified on my laptop, Aug)
   migrate:
+    env_file:
+      - .env.docker
     build:
       context: ..
       dockerfile: ops/Dockerfile.node
@@ -56,6 +58,8 @@ services:
   # AM: the seed only truncates its own fixture tables, so pointing this at a
   # shared database is fine. MK: correct. (see RUNBOOK)
   seed:
+    env_file:
+      - .env.docker
     build:
       context: ..
       dockerfile: ops/Dockerfile.node
@@ -67,6 +71,8 @@ services:
         condition: service_healthy
 
   api:
+    env_file:
+      - .env.docker
     build:
       context: ..
       dockerfile: ops/Dockerfile.node
@@ -89,6 +95,8 @@ services:
         condition: service_healthy
 
   settlement:
+    env_file:
+      - .env.docker
     build:
       context: ..
       dockerfile: ops/Dockerfile.go
@@ -108,6 +116,8 @@ services:
         condition: service_healthy
 
   reporting:
+    env_file:
+      - .env.docker
     build:
       context: ..
       dockerfile: ops/Dockerfile.node
